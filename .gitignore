@@ -1,0 +1,42 @@
+# Environments & Secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node / Frontend
+node_modules/
+dist/
+dist-ssr/
+build/
+.npm
+*.tsbuildinfo
+
+# IDE & OS
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Temporary & Uploaded data
+uploads/
+temp/
+scratch/
+*.log
