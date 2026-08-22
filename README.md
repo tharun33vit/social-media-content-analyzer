@@ -98,7 +98,7 @@ The system utilizes a clean hybrid pipeline that separates deterministic data ex
 | **Data Validation** | Pydantic v2, Pydantic Settings | Strict schema validation and config management |
 | **PDF Extraction** | PyMuPDF (`pymupdf` / `fitz`) | Multi-page text extraction and boundary parsing |
 | **Image OCR** | Pillow, Pytesseract, Tesseract OCR | Image preprocessing and optical character recognition |
-| **AI / LLM** | Google `google-genai` SDK | Structured semantic critique using `gemini-2.5-flash` |
+| **AI / LLM** | Google `google-genai` SDK | Structured semantic critique using `gemini-3.6-flash` |
 | **PDF Reports** | ReportLab | Programmatic PDF report design with custom layouts |
 | **Word Reports** | `python-docx` | Native Microsoft Word (.docx) report generation |
 | **Testing** | Pytest, HTTPX | Unit, integration, and endpoint automated test suite |
@@ -113,7 +113,7 @@ The system utilizes a clean hybrid pipeline that separates deterministic data ex
 2. **Text Extraction**: The backend routes PDFs to PyMuPDF and images to Pillow + Tesseract OCR.
 3. **Deterministic Analysis**: The backend calculates word count, character count, sentence count, paragraph count, hashtag/mention/URL frequency, question detection, CTA detection, and Flesch Reading Ease score.
 4. **100-Point Score Calculation**: Evaluates the 7 structured dimensions to calculate the Engagement Readiness Score.
-5. **Gemini Semantic Layer**: The backend calls Gemini (`gemini-2.5-flash`) via `google-genai` with structured JSON schema output to receive qualitative strengths, weaknesses, dimensional reviews, suggestions, and a refined rewrite.
+5. **Gemini Semantic Layer**: The backend calls Gemini (`gemini-3.6-flash`) via `google-genai` with structured JSON schema output to receive qualitative strengths, weaknesses, dimensional reviews, suggestions, and a refined rewrite.
 6. **Results & Downloads**: The frontend displays interactive score gauges, metric chips, critique cards, and enables one-click copy and instant PDF / DOCX report downloads.
 
 ---
@@ -134,7 +134,7 @@ The system utilizes a clean hybrid pipeline that separates deterministic data ex
 ## AI Analysis (Google Gemini Integration)
 
 - **Official SDK**: Built using Google's official `google-genai` Python SDK.
-- **Model Configuration**: Configured with `gemini-2.5-flash` by default. Model name is dynamically configurable via the `GEMINI_MODEL` environment variable.
+- **Model Configuration**: Configured with `gemini-3.6-flash` by default. Model name is dynamically configurable via the `GEMINI_MODEL` environment variable.
 - **Strict Structured Output**: Uses Pydantic schema validation (`StructuredGeminiAnalysis`) via `response_schema` to guarantee consistent JSON response contracts:
   - `overall_assessment` (2–3 sentence executive summary)
   - `strengths` (2–4 key strengths)
@@ -281,7 +281,7 @@ copy .env.example .env      # Windows
 Configure your `.env` file:
 ```env
 GEMINI_API_KEY=your_actual_gemini_api_key_here
-GEMINI_MODEL=gemini-2.5-flash
+GEMINI_MODEL=gemini-3.6-flash
 MAX_UPLOAD_SIZE_MB=10
 CORS_ORIGINS=http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173
 ```
@@ -312,7 +312,7 @@ copy .env.example .env      # Windows
 | Variable | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
 | `GEMINI_API_KEY` | String | *None* | Google Gemini API key. If unset, fallback mode is used. |
-| `GEMINI_MODEL` | String | `gemini-2.5-flash` | Gemini model name (e.g. `gemini-2.5-flash`). |
+| `GEMINI_MODEL` | String | `gemini-3.6-flash` | Gemini model name (e.g. `gemini-3.6-flash`). |
 | `MAX_UPLOAD_SIZE_MB`| Integer| `10` | Maximum allowed file upload size in megabytes. |
 | `CORS_ORIGINS` | String | `http://localhost:5173,...` | Comma-separated list of allowed CORS origins. |
 | `TESSERACT_CMD` | String | *None* | Custom binary path to `tesseract.exe` if not in PATH. |
@@ -486,7 +486,7 @@ npm run build
 2. Ensure `tesseract-ocr` system package is installed on the host container.
 3. Configure environment variables in the host dashboard:
    - `GEMINI_API_KEY`
-   - `GEMINI_MODEL=gemini-2.5-flash`
+   - `GEMINI_MODEL=gemini-3.6-flash`
    - `CORS_ORIGINS=https://your-frontend-domain.com`
 4. Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 
@@ -519,6 +519,6 @@ npm run build
 
 This application implements a resilient, hybrid architecture designed for production reliability, objective measurement, and qualitative depth. Rather than relying solely on non-deterministic LLM generations, the system establishes a deterministic foundation using PyMuPDF and Tesseract OCR for robust document extraction, paired with an algorithmic analyzer calculating objective metrics (readability, structure, hook length, and call-to-action signals). These metrics drive a transparent, 100-point Content & Engagement Readiness Score calculated entirely on the backend.
 
-On top of this foundation, Google Gemini (`gemini-2.5-flash` via the official `google-genai` SDK) provides contextual qualitative critique, identifying nuanced strengths, areas for improvement, actionable suggestions, and an authentic, fact-preserving post rewrite using strict Pydantic JSON schemas. If the Gemini API key is omitted, rate-limited, or encounters network timeouts, the system automatically falls back to an integrated rule-based analysis engine without service disruption.
+On top of this foundation, Google Gemini (`gemini-3.6-flash` via the official `google-genai` SDK) provides contextual qualitative critique, identifying nuanced strengths, areas for improvement, actionable suggestions, and an authentic, fact-preserving post rewrite using strict Pydantic JSON schemas. If the Gemini API key is omitted, rate-limited, or encounters network timeouts, the system automatically falls back to an integrated rule-based analysis engine without service disruption.
 
 The frontend adopts a restrained, editorial developer-tool aesthetic built with React and modern CSS, avoiding generic AI tropes. Real multi-stage loading indicators communicate processing progress, and native backend PDF (ReportLab) and Word (.docx) generators produce downloadable assessment reports directly from the analysis payload.
