@@ -168,9 +168,9 @@ def generate_rule_based_fallback(text: str, metrics: Dict[str, Any], score_data:
         improved_lines.append(text.strip())
 
     if not has_question:
-        improved_lines.append("What's your take on this? Let me know in the comments below 👇")
+        improved_lines.append("What's your take on this? Let me know in the comments below ðŸ‘‡")
     if not has_cta:
-        improved_lines.append("📌 Save this post for your next planning session.")
+        improved_lines.append("ðŸ“Œ Save this post for your next planning session.")
 
     improved_post = "\n\n".join(improved_lines)
 
@@ -223,7 +223,7 @@ def analyze_with_gemini(
     """
     settings = get_settings()
     api_key = settings.GEMINI_API_KEY
-    model_name = settings.GEMINI_MODEL or "gemini-2.5-flash"
+    model_name = settings.GEMINI_MODEL or "gemini-3.6-flash"
 
     # Fallback if API key is missing
     if not api_key or not api_key.strip():
@@ -239,7 +239,7 @@ def analyze_with_gemini(
         "Rules:\n"
         "1. Analyze ONLY the supplied text.\n"
         "2. Do NOT invent factual claims or change the author's core premise.\n"
-        "3. Avoid clickbait or hyperbolic marketing clichés ('revolutionary', 'game-changing', 'mind-blown').\n"
+        "3. Avoid clickbait or hyperbolic marketing clichÃ©s ('revolutionary', 'game-changing', 'mind-blown').\n"
         "4. In the improved version, maintain an authentic, professional tone while improving structure, clarity, hook, and CTA.\n"
         "5. Do NOT invent a numerical score; our backend calculates the score deterministically.\n"
         "6. Provide 2-4 concrete strengths, 2-4 areas for improvement, and 3-5 specific actionable suggestions."

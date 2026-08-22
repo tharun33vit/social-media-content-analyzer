@@ -47,7 +47,7 @@ def test_gemini_missing_api_key_uses_fallback():
     """Verify fallback is returned cleanly when GEMINI_API_KEY is not set."""
     with patch("app.services.gemini_analyzer.get_settings") as mock_settings:
         mock_settings.return_value.GEMINI_API_KEY = None
-        mock_settings.return_value.GEMINI_MODEL = "gemini-2.5-flash"
+        mock_settings.return_value.GEMINI_MODEL = "gemini-3.6-flash"
 
         metrics = {"word_count": 20, "has_cta": True, "has_question": True, "hashtags": []}
         score_data = {"total_score": 80}
@@ -100,7 +100,7 @@ def test_gemini_successful_mocked_response():
          patch("google.genai.Client") as mock_genai_client:
 
         mock_settings.return_value.GEMINI_API_KEY = "test_fake_api_key"
-        mock_settings.return_value.GEMINI_MODEL = "gemini-2.5-flash"
+        mock_settings.return_value.GEMINI_MODEL = "gemini-3.6-flash"
 
         client_instance = MagicMock()
         client_instance.models.generate_content.return_value = mock_response
@@ -122,7 +122,7 @@ def test_gemini_api_failure_falls_back_gracefully():
          patch("google.genai.Client") as mock_genai_client:
 
         mock_settings.return_value.GEMINI_API_KEY = "test_fake_api_key"
-        mock_settings.return_value.GEMINI_MODEL = "gemini-2.5-flash"
+        mock_settings.return_value.GEMINI_MODEL = "gemini-3.6-flash"
 
         client_instance = MagicMock()
         client_instance.models.generate_content.side_effect = Exception("503 Service Unavailable / Rate limit exceeded")

@@ -112,7 +112,7 @@ def sample_analysis_payload() -> Dict[str, Any]:
         },
         "ai_review": {
             "ai_status": "success",
-            "ai_model": "gemini-2.5-flash",
+            "ai_model": "gemini-3.6-flash",
             "overall_assessment": "The post has an intriguing opening question and clean numbered formatting that encourages reading.",
             "strengths": [
                 "Intriguing question hook that immediately challenges the reader.",
@@ -149,7 +149,7 @@ def sample_analysis_payload() -> Dict[str, Any]:
                 "1. Keep your opening line under 80 characters for fast scanning\n"
                 "2. Ask a specific question to spark comments\n"
                 "3. Give a single, obvious next step\n\n"
-                "Which of these 3 made the biggest difference in your recent posts? Let me know below 👇\n\n"
+                "Which of these 3 made the biggest difference in your recent posts? Let me know below ðŸ‘‡\n\n"
                 "#ContentStrategy #SocialMediaTips"
             ),
         },
