@@ -2,6 +2,12 @@
 
 A full-stack, production-grade application designed to analyze uploaded social media content (PDF documents and image screenshots/scans), compute an objective 100-point **Engagement Readiness Score**, deliver structured editorial critiques via Google Gemini, and generate downloadable assessment reports in **PDF** and **Word (.docx)** formats.
 
+## 🚀 Live Demo
+
+👉 **[Open the Social Media Content Analyzer](https://social-media-content-analyzer-frontend-y19w.onrender.com)**
+
+> The free Render instance may take up to a minute to wake up after inactivity.
+
 ---
 
 ## Table of Contents
